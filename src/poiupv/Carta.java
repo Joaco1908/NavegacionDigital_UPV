@@ -46,7 +46,7 @@ import poiupv.Poi;
  *
  * @author jsoler
  */
-public class FXMLDocumentController implements Initializable {
+public class Carta implements Initializable {
 
     //=======================================
     // hashmap para guardar los puntos de interes POI
