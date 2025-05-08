@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.LoginController">
    <left>
       <AnchorPane prefHeight="500.0" prefWidth="294.0" style="-fx-background-color: #8FB5DB;" BorderPane.alignment="CENTER">
          <children>
@@ -31,8 +32,8 @@
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="424.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="143.0" layoutY="203.0" promptText="Nombre de usuario" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0PX 0PX 2PX 0PC;" />
-            <PasswordField layoutX="143.0" layoutY="260.0" promptText="Contraseña" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="usernameField" layoutX="143.0" layoutY="203.0" promptText="Nombre de usuario" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0PX 0PX 2PX 0PC;" />
+            <PasswordField fx:id="passwordField" layoutX="143.0" layoutY="260.0" promptText="Contraseña" style="-fx-background-color: transparent; -fx-border-color: #0598FF; -fx-border-width: 0px 0px 2px 0px;" />
             <ImageView fitHeight="26.0" fitWidth="22.0" layoutX="111.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/user-solid.png" />
@@ -43,7 +44,7 @@
                   <Image url="@../resources/key-solid.png" />
                </image>
             </ImageView>
-            <Button layoutX="144.0" layoutY="324.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="134.0" style="-fx-background-color: #8fb5db; -fx-background-radius: 25;" text="Login" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="144.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="36.0" prefWidth="134.0" style="-fx-background-color: #8fb5db; -fx-background-radius: 25;" text="Login" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -69,6 +70,7 @@
                </font>
             </Text>
             <Text layoutX="207.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="o" />
+            <Label fx:id="loginErrorLabel" layoutX="101.0" layoutY="139.0" prefHeight="30.0" prefWidth="174.0" text="Usuario o contraseña incorrectos" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
    </right>
