@@ -13,6 +13,13 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
+import javafx.stage.Stage;
  
 /**
  * FXML Controller class
@@ -20,21 +27,17 @@ import java.io.FileNotFoundException;
  * @author 2005v
  */
 public class RegistroController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
     
+    @FXML private ImageView profileImageView;
+    @FXML private File selectedImageFile;
+    @FXML private Hyperlink loginLink;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {      
+
+
         
     }    
-    
-private ImageView profileImageView;
-
-private File selectedImageFile;
-
-
 private void handleUploadPhoto() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Selecciona tu foto de perfil");
@@ -50,5 +53,19 @@ private void handleUploadPhoto() {
         profileImageView.setImage(image);
     }
 }
+
+    @FXML
+    private void handleRegisterLink() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) loginLink.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
