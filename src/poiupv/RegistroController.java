@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +24,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Navigation;
 import model.User;
@@ -152,5 +155,31 @@ public class RegistroController implements Initializable {
             System.out.println("Error al registrar al usuario");
         }
     }
+    @FXML
+private void handleUploadPhoto(ActionEvent event) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Selecciona tu foto de perfil");
+    fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+    );
+
+    File file = fileChooser.showOpenDialog(null);
+
+    if (file != null) {
+        selectedImageFile = file;
+        Image image = new Image(file.toURI().toString());
+        profileImageView.setImage(image);
+      
+        double radius = Math.min(profileImageView.getFitWidth(), profileImageView.getFitHeight()) / 2;
+
+        Circle clip = new Circle(radius, radius, radius);
+        profileImageView.setClip(clip);
+        
+        Circle border = new Circle(25);
+        border.setStroke(Color.BLACK);
+        border.setFill(Color.TRANSPARENT);
+        border.setStrokeWidth(2);
+    }
+}
 
 }

@@ -69,12 +69,12 @@
                   <Text layoutX="41.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de nacimiento" />
                   <Text layoutX="40.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
                   <PasswordField fx:id="passwordField" layoutX="41.0" layoutY="326.0" prefHeight="26.0" prefWidth="318.0" />
-                  <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="105.0" layoutX="13.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImageView" fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/profile-solid.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="102.0" layoutY="440.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="76.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25; -fx-background-radius: 25;" text="Subir foto">
+                  <Button layoutX="102.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleUploadPhoto" prefHeight="23.0" prefWidth="76.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25; -fx-background-radius: 25;" text="Subir foto">
                      <font>
                         <Font size="10.0" />
                      </font>
