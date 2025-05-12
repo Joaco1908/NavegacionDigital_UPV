@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="500.0" prefWidth="70.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="28.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/bars-solid.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="80.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/profile-solid.png" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="accionesPerfil" layoutX="15.0" layoutY="465.0" prefHeight="14.0" prefWidth="19.0" promptText="User1" style="-fx-background-color: transparent; -fx-background-radius: 20;">
+               <effect>
+                  <Blend />
+               </effect>
+            </ComboBox>
+            <VBox layoutX="33.0" layoutY="150.0" prefHeight="200.0" prefWidth="20.0" snapToPixel="false">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../resources/dumbbell-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../resources/chart-bar-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../resources/map-solid.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="500.0" prefWidth="615.0">
+               <children>
+                  <HBox prefHeight="47.0" prefWidth="615.0">
+                     <children>
+                        <Text fill="#2b49b3" strokeType="OUTSIDE" strokeWidth="0.0" text="Menú principal">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="38.0" prefWidth="31.0">
+                           <HBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Separator>
+                        <Text fill="#4c4c4e" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Bienvenido, User1!" wrappingWidth="150.66676330566406">
+                           <HBox.margin>
+                              <Insets top="14.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="fechaActual" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" text="11:03, 11 de mayo" textFill="#4c4c4e" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="15.0" top="14.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="220.0" prefWidth="615.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="27.0" layoutY="37.0" prefHeight="145.0" prefWidth="145.0">
+                                 <children>
+                                    <AnchorPane fx:id="botonEjercicios" prefHeight="167.0" prefWidth="185.0">
+                                       <children>
+                                          <Button fx:id="botonEjercicios" layoutY="17.33333396911621" mnemonicParsing="false" prefHeight="147.0" prefWidth="163.0" style="-fx-background-radius: 20; -fx-background-color: #2b49b3;" text="Ejercicios" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="167.0" text="Realizar ejercicios de práctica">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="27.0" layoutY="37.0" prefHeight="145.0" prefWidth="145.0">
+                                 <children>
+                                    <AnchorPane>
+                                       <children>
+                                          <Button fx:id="botonResultados" layoutY="17.33333396911621" mnemonicParsing="false" prefHeight="147.0" prefWidth="163.0" style="-fx-background-radius: 20; -fx-background-color: #2b49b3;" text="Resultados" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="163.0" text="Consultar tu historial de sesiones.">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="27.0" layoutY="37.0" prefHeight="145.0" prefWidth="145.0">
+                                 <children>
+                                    <AnchorPane>
+                                       <children>
+                                          <Button fx:id="botonCarta" layoutY="17.33333396911621" mnemonicParsing="false" prefHeight="147.0" prefWidth="163.0" style="-fx-background-radius: 20; -fx-background-color: #2b49b3;" text="Carta náutica" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Label alignment="CENTER" prefHeight="15.0" prefWidth="248.0" text="Herramientas de navegacion sobre la carta">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="75.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

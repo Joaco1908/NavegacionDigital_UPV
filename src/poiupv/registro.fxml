@@ -17,14 +17,14 @@
    <left>
       <AnchorPane prefHeight="500.0" prefWidth="294.0" style="-fx-background-color: #8FB5DB;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="164.0" fitWidth="167.0" layoutX="65.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="123.0" fitWidth="116.0" layoutX="89.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/anchor-solid.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="13.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navegación Digital" textAlignment="CENTER">
+            <Text fill="WHITE" layoutX="14.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navegación Digital" textAlignment="CENTER" wrappingWidth="266.8134765625">
                <font>
-                  <Font name="System Bold" size="30.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Text>
          </children>
