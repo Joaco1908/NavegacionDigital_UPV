@@ -24,6 +24,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -45,14 +46,47 @@ public class RegistroController implements Initializable {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private DatePicker birthDatePicker;
+    @FXML private VBox registerVBox;
+    @FXML private VBox leftContentBox;
+    @FXML private VBox formBox;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
-
+        
+        registerVBox.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                bindScaling(newScene);
+            }
+        });
 
         
     }    
+    
+
+    private void bindScaling(Scene scene) {
+        double baseWidth = 900;
+        double baseHeight = 600;
+        double maxScale = 1.3;
+
+        scene.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double scale = Math.min(newVal.doubleValue() / baseWidth, maxScale);
+            registerVBox.setScaleX(scale);
+            leftContentBox.setScaleX(scale);
+        });
+
+        scene.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double scale = Math.min(newVal.doubleValue() / baseHeight, maxScale);
+            registerVBox.setScaleY(scale);
+            registerVBox.setSpacing(18 * scale);
+
+            leftContentBox.setScaleY(scale);
+            leftContentBox.setSpacing(20 * scale);
+        });
+}
+
+
+    
     private void handleUploadPhoto() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecciona tu foto de perfil");
@@ -181,5 +215,6 @@ private void handleUploadPhoto(ActionEvent event) {
         border.setStrokeWidth(2);
     }
 }
+
 
 }
