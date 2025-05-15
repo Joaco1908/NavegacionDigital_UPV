@@ -59,7 +59,7 @@ public class MenuController {
     @FXML private void handleRandomExercise() {
         System.out.println("Ejercicio aleatorio");
     }
-
+                                
     @FXML private void handleCartaNautica() {
         System.out.println("Ir a carta náutica");
     }

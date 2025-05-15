@@ -109,6 +109,13 @@ public class RegistroController implements Initializable {
         .and(validBirthDate);
 
         registerButton.disableProperty().bind(validFields.not());
+        
+        usernameField.setOnAction(e -> emailField.requestFocus());
+        emailField.setOnAction(e -> birthDatePicker.requestFocus());
+        birthDatePicker.setOnAction(e -> passwordField.requestFocus());
+        passwordField.setOnAction(e -> confirmPasswordField.requestFocus());
+        confirmPasswordField.setOnAction(e -> handleRegister());
+
     }
     
     private void showError(boolean isValid, Node field, Node errorMessage){
@@ -272,10 +279,5 @@ public class RegistroController implements Initializable {
         validBirthDate.set(isValid);
         showError(isValid, birthDatePicker, dateError);
     }
-
-
-
-
-
 
 }

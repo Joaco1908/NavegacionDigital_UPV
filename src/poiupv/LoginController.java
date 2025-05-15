@@ -34,6 +34,9 @@ public class LoginController implements Initializable {
                 bindScaling(newScene);
             }
         });
+         
+        usernameField.setOnAction(e -> passwordField.requestFocus());
+        passwordField.setOnAction(e -> handleLogin());
     }
 
     private void bindScaling(Scene scene) {
