@@ -23,6 +23,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -72,6 +73,14 @@ public class Carta implements Initializable {
     private SplitPane splitPane;
     @FXML
     private Label mousePosition;
+    @FXML private Button btnCircle;
+    @FXML private Button btnPencil;
+    @FXML private Button btnCompass;
+    @FXML private Button btnText;
+    @FXML private Button btnRuler;
+    @FXML private Button btnEraser;
+    @FXML private Button btnTrash;
+
 
     @FXML
     void zoomIn(ActionEvent event) {
@@ -221,6 +230,21 @@ public class Carta implements Initializable {
                 poi.setPosition(localPoint);
                 map_listview.getItems().add(poi);
             }
+        }
+    }
+    @FXML
+    private void handleToolAction(ActionEvent event) {
+        Button clicked = (Button) event.getSource();
+
+        // Desactiva estilo de todos
+        List<Button> buttons = List.of(btnCircle, btnPencil, btnCompass, btnText, btnRuler, btnEraser, btnTrash);
+        for (Button btn : buttons) {
+            btn.getStyleClass().remove("boton-activo");
+        }
+
+        // Activa el seleccionado
+        if (!clicked.getStyleClass().contains("boton-activo")) {
+            clicked.getStyleClass().add("boton-activo");
         }
     }
 

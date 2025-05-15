@@ -66,3 +66,29 @@ S17.642,20.762,13.558,20.762z";
 .map-pin .arrow-button .arrow {
     -fx-padding: 0;
 }
+.tool-button {
+    -fx-background-color: #8FB5DB;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-cursor: hand;
+}
+
+.tool-button:hover {
+    -fx-background-color: #6FA4D4;
+}
+
+.boton-activo {
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(one-pass-box, white, 5, 0.0, 0, 0);
+}
+
+.zoom-button {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-pref-width: 25;
+    -fx-pref-height: 25;
+}
+
+
