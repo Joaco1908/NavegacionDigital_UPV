@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
             if (user != null) {
                 System.out.println("Login exitoso de: " + user.getNickName());
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Carta.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
                 Parent root = loader.load();
 
                 Stage stage = (Stage) loginButton.getScene().getWindow();

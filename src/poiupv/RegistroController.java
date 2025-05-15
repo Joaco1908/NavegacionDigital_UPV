@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package poiupv;
 
 import java.net.URL;
@@ -15,13 +11,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -49,6 +51,19 @@ public class RegistroController implements Initializable {
     @FXML private VBox registerVBox;
     @FXML private VBox leftContentBox;
     @FXML private VBox formBox;
+    @FXML private Label userError;
+    @FXML private Label emailError;
+    @FXML private Label passwordError;
+    @FXML private Label passwordConfirmError;
+    @FXML private Label dateError;
+    @FXML private Button registerButton;
+
+    private BooleanProperty validUsername;
+    private BooleanProperty validEmail;
+    private BooleanProperty validPassword;
+    private BooleanProperty confirmPasswords;
+    private BooleanProperty validBirthDate;
+
 
     
     @Override
@@ -60,9 +75,47 @@ public class RegistroController implements Initializable {
             }
         });
 
+        validUsername = new SimpleBooleanProperty(false);
+        validEmail = new SimpleBooleanProperty(false);
+        validPassword = new SimpleBooleanProperty(false);
+        confirmPasswords = new SimpleBooleanProperty(false);
+        validBirthDate = new SimpleBooleanProperty(false);
         
-    }    
+        // Listeners
+        usernameField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateUsername();
+        });
+
+        emailField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateEmail();
+        });
+
+        passwordField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validatePassword();
+        });
+
+        confirmPasswordField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateConfirmPassword();
+        });
+
+        birthDatePicker.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateBirthDate();
+        });
+        
+        BooleanBinding validFields = validUsername
+        .and(validEmail)
+        .and(validPassword)
+        .and(confirmPasswords)
+        .and(validBirthDate);
+
+        registerButton.disableProperty().bind(validFields.not());
+    }
     
+    private void showError(boolean isValid, Node field, Node errorMessage){
+        errorMessage.setVisible(!isValid);
+        field.setStyle(((isValid) ? "" : "-fx-background-color: #FCE5E0"));
+    }
+  
 
     private void bindScaling(Scene scene) {
         double baseWidth = 900;
@@ -118,103 +171,111 @@ public class RegistroController implements Initializable {
     }
     
     @FXML
-    private void handleRegister(){
+    private void handleRegister() {
+        validateUsername();
+        validateEmail();
+        validatePassword();
+        validateConfirmPassword();
+        validateBirthDate();
+
+        if (!validUsername.get() || !validEmail.get() || !validPassword.get()
+                || !confirmPasswords.get() || !validBirthDate.get()) {
+            return;
+        }
+
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
         String email = emailField.getText().trim();
-        String confirmPassword = confirmPasswordField.getText().trim();
         LocalDate birthDate = birthDatePicker.getValue();
-        
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || birthDate == null){
-        System.out.println("Todos los campos son obligatorios.");
-        return;
-        }
-        
-        if (!password.equals(confirmPassword)) {
-        System.out.println("Las contraseñas no coinciden.");
-        return;
-        }
-        
-        if (!User.checkNickName(username)) {
-        System.out.println("El nombre de usuario no es válido.");
-        return;
-        }
-        
-        if (!User.checkEmail(email)) {
-        System.out.println("El correo electrónico no es válido.");
-        return;
-        }
 
-        if (!User.checkPassword(password)) {
-            System.out.println("La contraseña no cumple con los requisitos.");
-            return;
-        }
-
-        if (birthDate.isAfter(LocalDate.now().minusYears(16))) {
-            System.out.println("Debes tener al menos 16 años.");
-            return;
-        }
-
-        System.out.println("Validación exitosa. Listo para registrar.");
-        
-        try{
+        try {
             Image avatar;
-            if(selectedImageFile != null){
+            if (selectedImageFile != null) {
                 avatar = new Image(new FileInputStream(selectedImageFile));
-            } 
-            else{
+            } else {
                 avatar = new Image(getClass().getResourceAsStream("/resources/user-solid.png"));
             }
-            
+
             Navigation nav = Navigation.getInstance();
-            
-            if(nav.exitsNickName(username)){
-                System.out.println("Ya existe un usuario con ese nombre.");
+
+            if (nav.exitsNickName(username)) {
+                userError.setText("Ese nombre de usuario ya está en uso");
+                showError(false, usernameField, userError);
                 return;
             }
-            
-            //Volver a la página de login
+
+            User newUser = nav.registerUser(username, email, password, avatar, birthDate);
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
 
-            User newUser = nav.registerUser(username, email, password, avatar, birthDate);
-            
-            System.out.println("Usuario registrado con éxito: " + newUser.getNickName());
-            
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error al registrar al usuario");
         }
     }
+
     @FXML
-private void handleUploadPhoto(ActionEvent event) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Selecciona tu foto de perfil");
-    fileChooser.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
-    );
+    private void handleUploadPhoto(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecciona tu foto de perfil");
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+        );
 
-    File file = fileChooser.showOpenDialog(null);
+        File file = fileChooser.showOpenDialog(null);
 
-    if (file != null) {
-        selectedImageFile = file;
-        Image image = new Image(file.toURI().toString());
-        profileImageView.setImage(image);
-      
-        double radius = Math.min(profileImageView.getFitWidth(), profileImageView.getFitHeight()) / 2;
+        if (file != null) {
+            selectedImageFile = file;
+            Image image = new Image(file.toURI().toString());
+            profileImageView.setImage(image);
 
-        Circle clip = new Circle(radius, radius, radius);
-        profileImageView.setClip(clip);
-        
-        Circle border = new Circle(25);
-        border.setStroke(Color.BLACK);
-        border.setFill(Color.TRANSPARENT);
-        border.setStrokeWidth(2);
+            double radius = Math.min(profileImageView.getFitWidth(), profileImageView.getFitHeight()) / 2;
+
+            Circle clip = new Circle(radius, radius, radius);
+            profileImageView.setClip(clip);
+
+            Circle border = new Circle(25);
+            border.setStroke(Color.BLACK);
+            border.setFill(Color.TRANSPARENT);
+            border.setStrokeWidth(2);
+        }
     }
-}
+    private void validateUsername() {
+        boolean isValid = User.checkNickName(usernameField.getText().trim());
+        validUsername.set(isValid);
+        showError(isValid, usernameField, userError);
+    }
+    
+    private void validateEmail() {
+        boolean isValid = User.checkEmail(emailField.getText().trim());
+        validEmail.set(isValid);
+        showError(isValid, emailField, emailError);
+    }
+    private void validatePassword() {
+        boolean isValid = User.checkPassword(passwordField.getText().trim());
+        validPassword.set(isValid);
+        showError(isValid, passwordField, passwordError);
+    }
+    
+    private void validateConfirmPassword() {
+        boolean match = passwordField.getText().equals(confirmPasswordField.getText());
+        confirmPasswords.set(match);
+        showError(match, confirmPasswordField, passwordConfirmError);
+    }
+    
+    private void validateBirthDate() {
+        LocalDate birthDate = birthDatePicker.getValue();
+        boolean isValid = birthDate != null && birthDate.isBefore(LocalDate.now().minusYears(16));
+        validBirthDate.set(isValid);
+        showError(isValid, birthDatePicker, dateError);
+    }
+
+
+
+
 
 
 }
