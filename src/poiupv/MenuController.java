@@ -49,13 +49,37 @@ public class MenuController {
     }
 
     // Los métodos para las acciones
-private void handleEditProfile() {
-        System.out.println("Editar perfil");
+    private void handleEditProfile() {
+            System.out.println("Editar perfil");
+    }
+    
+    @FXML
+    private void handleLogout() {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Cerrar sesión");
+        confirm.setHeaderText("¿Seguro que deseas cerrar sesión?");
+        confirm.setContentText("Perderás el progreso no guardado.");
+
+        ButtonType yes = new ButtonType("Sí", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirm.getButtonTypes().setAll(yes, no);
+
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == yes) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                    Parent root = loader.load();
+                    Stage currentStage = (Stage) profileImage.getScene().getWindow();
+                    currentStage.setScene(new Scene(root));
+                    currentStage.setTitle("Iniciar sesión");
+                    currentStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    private void handleLogout() {
-        System.out.println("Cerrar sesión");
-    }
 
     @FXML private void handleSelectExercise() {
         System.out.println("Seleccionar ejercicio");
@@ -73,4 +97,6 @@ private void handleEditProfile() {
                 stage.setScene(new Scene(root));
                 stage.show();
     }
+    
+    
 }

@@ -141,7 +141,7 @@ public class Carta implements Initializable {
         // Configuración del zoom_slider
         zoom_slider.setMin(0.3);
         zoom_slider.setMax(1.5);
-        zoom_slider.setValue(0.3);  // Este valor activa el listener
+        zoom_slider.setValue(0.3);
 
         // Aplicar el zoom directamente a la escala al principio
         double initialZoom = zoom_slider.getValue();
