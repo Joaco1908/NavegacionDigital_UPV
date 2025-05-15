@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -130,24 +131,35 @@ public class Carta implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //==========================================================
-        // inicializamos el slider y enlazamos con el zoom
-        zoom_slider.setMin(0.5);
-        zoom_slider.setMax(1.5);
-        zoom_slider.setValue(1.0);
-        zoom_slider.valueProperty().addListener((o, oldVal, newVal) -> zoom((Double) newVal));
-
-        //=========================================================================
-        //Envuelva el contenido de scrollpane en un grupo para que 
-        //ScrollPane vuelva a calcular las barras de desplazamiento tras el escalado
+        // Envolver el contenido en grupos para zoom
         Group contentGroup = new Group();
         zoomGroup = new Group();
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
 
+        // Configuración del zoom_slider
+        zoom_slider.setMin(0.3);
+        zoom_slider.setMax(1.5);
+        zoom_slider.setValue(0.3);  // Este valor activa el listener
+
+        // Aplicar el zoom directamente a la escala al principio
+        double initialZoom = zoom_slider.getValue();
+        zoomGroup.setScaleX(initialZoom);
+        zoomGroup.setScaleY(initialZoom);
+
+        // Vincular el slider al método de zoom
+        zoom_slider.valueProperty().addListener((o, oldVal, newVal) -> zoom((Double) newVal));
+
+        // Centrar scroll tras el layout completo
+        Platform.runLater(() -> {
+            map_scrollpane.applyCss();
+            map_scrollpane.layout();
+            map_scrollpane.setHvalue(0.5);
+            map_scrollpane.setVvalue(0.5);
+        });
     }
+
 
     @FXML
     private void showPosition(MouseEvent event) {
