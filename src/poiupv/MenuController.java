@@ -4,8 +4,12 @@
  */
 package poiupv;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,8 +23,9 @@ public class MenuController {
     @FXML private Label usernameLabel;
 
     private ContextMenu profileMenu;
-
     @FXML
+    private Button cartaButton;
+
     public void initialize() {
         // Asignar imagen de perfil (por defecto si no hay personalizada)
         Image defaultProfile = new Image(getClass().getResourceAsStream("/resources/profile-solid.png"));
@@ -44,11 +49,11 @@ public class MenuController {
     }
 
     // Los métodos para las acciones
-    @FXML private void handleEditProfile() {
+private void handleEditProfile() {
         System.out.println("Editar perfil");
     }
 
-    @FXML private void handleLogout() {
+    private void handleLogout() {
         System.out.println("Cerrar sesión");
     }
 
@@ -60,7 +65,12 @@ public class MenuController {
         System.out.println("Ejercicio aleatorio");
     }
                                 
-    @FXML private void handleCartaNautica() {
-        System.out.println("Ir a carta náutica");
+    @FXML private void handleCartaNautica() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("carta.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage) cartaButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
     }
 }
