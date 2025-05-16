@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="556.0" prefWidth="853.0" style="-fx-background-color: #8FB5DB;" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.Carta">
    <children>
@@ -28,9 +41,9 @@
             </MenuBar>
             <Region HBox.hgrow="ALWAYS" />
             <Label text="Zoom" textFill="WHITE" />
-            <Button onAction="#zoomOut" text="-" styleClass="zoom-button"/>
+            <Button onAction="#zoomOut" styleClass="zoom-button" text="-" />
             <Slider fx:id="zoom_slider" />
-            <Button onAction="#zoomIn" text="+" styleClass="zoom-button"/>
+            <Button onAction="#zoomIn" styleClass="zoom-button" text="+" />
          </children>
       </HBox>
 
@@ -39,14 +52,14 @@
          <items>
 
             <!-- Barra lateral izquierda -->
-            <VBox fx:id="toolbar" alignment="CENTER" spacing="30.0" maxWidth="55.0">
+            <VBox fx:id="toolbar" alignment="CENTER" maxWidth="55.0" spacing="30.0">
                <children>
 
-                  <Button fx:id="btnCircle" onAction="#handleToolAction" styleClass="tool-button">
+                  <Button fx:id="btnCircle" onAction="#handleToolAction" prefHeight="58.0" prefWidth="36.0" styleClass="tool-button">
                      <tooltip><Tooltip text="Dibujar punto" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/circle-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="15.0" preserveRatio="true">
+                           <image><Image url="@../resources/circle-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
@@ -54,8 +67,8 @@
                   <Button fx:id="btnPencil" onAction="#handleToolAction" styleClass="tool-button">
                      <tooltip><Tooltip text="Dibujar línea" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/pencil-alt-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
+                           <image><Image url="@../resources/pencil-alt-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
@@ -63,8 +76,8 @@
                   <Button fx:id="btnCompass" onAction="#handleToolAction" styleClass="tool-button">
                      <tooltip><Tooltip text="Dibujar circunferencias" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/drafting-compass-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
+                           <image><Image url="@../resources/drafting-compass-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
@@ -72,8 +85,8 @@
                   <Button fx:id="btnText" onAction="#handleToolAction" styleClass="tool-button">
                      <tooltip><Tooltip text="Escribir texto" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/font-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
+                           <image><Image url="@../resources/font-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
@@ -81,21 +94,21 @@
                   <Button fx:id="btnRuler" onAction="#handleToolAction" styleClass="tool-button">
                      <tooltip><Tooltip text="Regla" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/ruler-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
+                           <image><Image url="@../resources/ruler-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
 
-                  <ColorPicker prefWidth="36" prefHeight="36">
+                  <ColorPicker prefHeight="36" prefWidth="36">
                      <tooltip><Tooltip text="Color de dibujo" /></tooltip>
                   </ColorPicker>
 
                   <Button fx:id="btnEraser" onAction="#handleToolAction" styleClass="tool-button">
                      <tooltip><Tooltip text="Borrar" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/eraser-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
+                           <image><Image url="@../resources/eraser-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
@@ -103,8 +116,8 @@
                   <Button fx:id="btnTrash" onAction="#handleToolAction" styleClass="tool-button">
                      <tooltip><Tooltip text="Eliminar todo" /></tooltip>
                      <graphic>
-                        <ImageView fitWidth="25" fitHeight="25" preserveRatio="true">
-                           <image><Image url="@../resources/trash-solid.png"/></image>
+                        <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
+                           <image><Image url="@../resources/trash-solid.png" /></image>
                         </ImageView>
                      </graphic>
                   </Button>
@@ -113,12 +126,12 @@
             </VBox>
 
             <!-- Zona del mapa -->
-            <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" vbarPolicy="ALWAYS" pannable="true">
+            <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" pannable="true" vbarPolicy="ALWAYS">
                <content>
                   <Pane>
                      <children>
                         <ImageView>
-                           <image><Image url="@../resources/carta_nautica.jpg"/></image>
+                           <image><Image url="@../resources/carta_nautica.jpg" /></image>
                         </ImageView>
                         <MenuButton fx:id="map_pin" visible="false">
                            <items>
@@ -136,7 +149,7 @@
       <!-- Pie con coordenadas -->
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Label fx:id="mousePosition" text="SceneX:     ScenY:     " textFill="WHITE" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="mousePosition" text="SceneX:     ScenY:     " textFill="WHITE" HBox.hgrow="ALWAYS" />
          </children>
          <VBox.margin><Insets bottom="12.0" right="12.0" top="6.0" /></VBox.margin>
       </HBox>

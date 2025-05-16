@@ -46,7 +46,7 @@
             <children>
             <HBox alignment="CENTER" spacing="75.0">
                <children>
-                      <Button maxHeight="200.0" maxWidth="200.0" onAction="#handleRandomExercise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8FB5DB; -fx-background-radius: 30;" styleClass="dashboard-button">
+                      <Button maxHeight="200.0" maxWidth="200.0" onAction="#handleRandomExercise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8FB5DB; -fx-background-radius: 30;">
                      <graphic>
                         <VBox alignment="CENTER" spacing="10.0">
                            <children>
@@ -67,7 +67,7 @@
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                   </Button>
-                      <Button onAction="#handleSelectExercise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8FB5DB; -fx-background-radius: 32;" styleClass="dashboard-button">
+                      <Button onAction="#handleSelectExercise" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8FB5DB; -fx-background-radius: 32;">
                      <graphic>
                         <VBox alignment="CENTER" spacing="10.0">
                            <children>
@@ -92,7 +92,7 @@
             </HBox>
             <HBox alignment="CENTER" spacing="75.0">
                <children>
-                      <Button fx:id="cartaButton" minHeight="200.0" minWidth="200.0" onAction="#handleCartaNautica" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8FB5DB; -fx-background-radius: 30;" styleClass="dashboard-button">
+                      <Button fx:id="cartaButton" minHeight="200.0" minWidth="200.0" onAction="#handleCartaNautica" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8FB5DB; -fx-background-radius: 30;">
                      <graphic>
                         <VBox alignment="CENTER" spacing="10.0">
                            <children>
